@@ -5,7 +5,7 @@ export const APP_TEXT = {
   country: "Country:",
   humidity: "Humidity:",
   description: "Description:",
-  getWeateherBtn: "Get Weather",
+  getWeatherBtn: "Get Weather",
   resetBtn: "Reset",
   cityPlaceholder: "City...",
   countryPlaceholder: "Country...",

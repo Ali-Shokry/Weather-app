@@ -11,6 +11,7 @@ export interface weatherProps {
 };
 export interface formProps {
     getWeather: (e: React.FormEvent<HTMLFormElement>) => void;
+    handleReset: ()=> void;
 };
 export interface ApiResponse {
     main: {

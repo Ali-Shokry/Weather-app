@@ -15,7 +15,7 @@ export const useWeather = () => {
   const fetchWeather = async (city: string, country: string) => {
     const isDataSelected = city && country;
     const apiData = await fetch(
-      BASE_URL + `/weather?q=${city}%2C${country}&appid=${API_KEY}`,
+      BASE_URL + `/weather?q=${city}%2C${country}&appid=${API_KEY}&units=metric`,
     );
     const formatedData: ApiResponse = await apiData.json();
 
@@ -42,5 +42,15 @@ export const useWeather = () => {
       });
     }
   };
-  return { weatherData, fetchWeather };
+  const resetData = () => {
+    setWeather({
+      temperature: "",
+      city: "",
+      country: "",
+      humidity: "",
+      description: "",
+      error: "",
+    });
+  };
+  return { weatherData, fetchWeather, resetData };
 };
