@@ -1,7 +1,7 @@
 // Weather app using function component and custom hooks and tailwind css in styling (ts,npm vite{new method of react app creation })
-import Form from "./Components/Form";
-import Weather from "./Components/WeatheCompr";
-import { useWeather } from "./Hooks/UseWeather";
+import Form from "./components/Form";
+import Weather from "./components/WeatheCompr";
+import { useWeather } from "./hooks/UseWeather";
 
 const App = () => {
   const { weatherData, fetchWeather } = useWeather();
