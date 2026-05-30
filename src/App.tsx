@@ -13,13 +13,13 @@ const App = () => {
       .value;
     fetchWeather(city, country);
   };
-  const handleReset = ()=> {
+  const handleReset = () => {
     resetData();
   }
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-[#797979] to-[#58b0aa] p-4">
       <div className="w-95 min-h-137.5 bg-[#2C4A47] rounded-sm p-8 shadow-2xl flex flex-col justify-center">
-        <Form getWeather={getWeather} handleReset={handleReset}/>
+        <Form getWeather={getWeather} handleReset={handleReset} />
         <Weather data={weatherData} />
       </div>
     </div>

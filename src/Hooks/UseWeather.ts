@@ -13,23 +13,24 @@ export const useWeather = () => {
   });
 
   const fetchWeather = async (city: string, country: string) => {
-    const isDataSelected = city && country;
-    const apiData = await fetch(
-      BASE_URL + `/weather?q=${city}%2C${country}&appid=${API_KEY}&units=metric`,
-    );
-    const formatedData: ApiResponse = await apiData.json();
-
-    // dto = Data Obj model
-    const dto = {
-      temperature: formatedData.main.temp,
-      city: formatedData.name,
-      country: formatedData.sys.country,
-      humidity: formatedData.main.humidity,
-      description: formatedData.weather[0].description,
-      error: "",
-    };
+    const isDataSelected = Boolean(city && country);
 
     if (isDataSelected) {
+      const apiData = await fetch(
+        BASE_URL +
+          `/weather?q=${city}%2C${country}&appid=${API_KEY}&units=metric`,
+      );
+      const formatedData: ApiResponse = await apiData.json();
+
+      // dto = Data Obj model
+      const dto = {
+        temperature: formatedData?.main?.temp?.toFixed(0) + " °C",
+        city: formatedData?.name,
+        country: formatedData?.sys?.country,
+        humidity: formatedData?.main?.humidity,
+        description: formatedData?.weather[0]?.description,
+        error: "",
+      };
       setWeather(dto);
     } else {
       setWeather({
