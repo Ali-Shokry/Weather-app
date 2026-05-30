@@ -1,4 +1,5 @@
-import { weatherProps } from "../Types/weather";
+import { weatherProps } from "../types/weather";
+import { APP_TEXT } from "../utils";
 const Weather = ({ data }: weatherProps) => {
   return (
     // data.city  ?
@@ -17,53 +18,53 @@ const Weather = ({ data }: weatherProps) => {
     //     </div>
     // )
     <div className="w-full text-left mt-6 flex flex-col space-y-4 focus:border-t border-white/10 pt-5">
-      {data.city && (
+      {data?.city && (
         <>
           <p className="flex justify-between items-center border-b border-white/5 pb-2">
             <span className="text-gray-400 text-s uppercase tracking-wider font-medium">
-              Temperature:
+              {APP_TEXT.temperature}
             </span>
             <span className="text-gray-400 text-base font-semibold">
-              {data.temperature}
+              {data?.temperature}
             </span>
           </p>
           <p className="flex justify-between items-center border-b border-white/5 pb-2">
             <span className="text-gray-400 text-s uppercase tracking-wider font-medium">
-              City:
+              {APP_TEXT.city}
             </span>
             <span className="text-gray-400 text-base font-semibold">
-              {data.city}
+              {data?.city}
             </span>
           </p>
           <p className="flex justify-between items-center border-b border-white/5 pb-2">
             <span className="text-gray-400 text-s uppercase tracking-wider font-medium">
-              Country:
+              {APP_TEXT.country}
             </span>
             <span className="text-gray-400 text-base font-semibold">
-              {data.country}
+              {data?.country}
             </span>
           </p>
           <p className="flex justify-between items-center border-b border-white/5 pb-2">
             <span className="text-gray-400 text-s uppercase tracking-wider font-medium">
-              Humidity:
+              {APP_TEXT.humidity}
             </span>
             <span className="text-gray-400 text-base font-semibold">
-              {data.humidity}
+              {data?.humidity}
             </span>
           </p>
           <p className="flex justify-between items-center border-b border-white/5 pb-2">
             <span className="text-gray-400 text-s uppercase tracking-wider font-medium">
-              Description:
+              {APP_TEXT.description}
             </span>
             <span className="text-gray-400 text-base font-semibold">
-              {data.description}
+              {data?.description}
             </span>
           </p>
         </>
       )}
-      {data.error && (
+      {data?.error && (
         <p className="text-red-400 text-sm font-medium text-center bg-red-900/20 p-2.5 rounded border border-red-500/20 mt-2">
-          {data.error}
+          {data?.error}
         </p>
       )}
     </div>

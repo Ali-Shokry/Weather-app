@@ -1,38 +1,57 @@
 import { useState } from "react";
-import { weatherDataType, ApiResponse } from "../Types/weather";
+import { weatherDataType, ApiResponse } from "../types/weather";
+import { API_KEY, APP_TEXT, BASE_URL } from "../utils";
+
 export const useWeather = () => {
-    const [weatherData, setWeather] = useState<weatherDataType>({
+  const [weatherData, setWeather] = useState<weatherDataType>({
+    temperature: "",
+    city: "",
+    country: "",
+    humidity: "",
+    description: "",
+    error: "",
+  });
+
+  const fetchWeather = async (city: string, country: string) => {
+    const isDataSelected = Boolean(city && country);
+
+    if (isDataSelected) {
+      const apiData = await fetch(
+        BASE_URL +
+          `/weather?q=${city}%2C${country}&appid=${API_KEY}&units=metric`,
+      );
+      const formatedData: ApiResponse = await apiData.json();
+
+      // dto = Data Obj model
+      const dto = {
+        temperature: formatedData?.main?.temp?.toFixed(0) + " °C",
+        city: formatedData?.name,
+        country: formatedData?.sys?.country,
+        humidity: formatedData?.main?.humidity,
+        description: formatedData?.weather[0]?.description,
+        error: "",
+      };
+      setWeather(dto);
+    } else {
+      setWeather({
         temperature: "",
         city: "",
         country: "",
         humidity: "",
         description: "",
-        error: "",
+        error: APP_TEXT.errMsg,
+      });
+    }
+  };
+  const resetData = () => {
+    setWeather({
+      temperature: "",
+      city: "",
+      country: "",
+      humidity: "",
+      description: "",
+      error: "",
     });
-    // API link: https://api.openweathermap.org/data/2.5/weather?q=cairo%2Cegypt&appid=e36ed364400282e43250b6c4c0274d44
-    const apiKey = "e36ed364400282e43250b6c4c0274d44";
-    const fetchWeather = async (city: string, country: string) => {
-        const apiData = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${city}%2C${country}&appid=${apiKey}`)
-        const formatedData: ApiResponse = await apiData.json();
-        if (city  && country ) {
-            setWeather({
-                temperature: formatedData.main.temp,
-                city: formatedData.name,
-                country: formatedData.sys.country,
-                humidity: formatedData.main.humidity,
-                description: formatedData.weather[0].description,
-                error: ""
-            });
-        } else {
-            setWeather({
-                temperature: "",
-                city: "",
-                country: "",
-                humidity: "",
-                description: "",
-                error: "Please enter data",
-            });
-        };  
-    };
-    return {weatherData, fetchWeather};
+  };
+  return { weatherData, fetchWeather, resetData };
 };
